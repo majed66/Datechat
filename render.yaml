@@ -1,0 +1,15 @@
+# Exported from Render on 2025-06-28T19:58:48Z
+services:
+- type: web
+  name: Datechat
+  runtime: python
+  repo: https://github.com/majed66/Datechat
+  plan: free
+  envVars:
+  - key: BOT_TOKEN
+    sync: false
+  region: oregon
+  buildCommand: pip install -r requirements.txt
+  startCommand: python main.py
+  autoDeployTrigger: commit
+version: "1"
