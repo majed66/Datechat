@@ -1,32 +1,26 @@
-import os
 from telegram import Update
 from telegram.ext import (
     ApplicationBuilder,
-    ContextTypes,
     CommandHandler,
-    MessageHandler,
-    filters,
+    ContextTypes,
 )
 
-# گرفتن توکن از محیط
-TOKEN = os.getenv("BOT_TOKEN")
+# توکن مستقیم
+TOKEN = "7712763707:AAH687mRZ2w3k2RK_rJDyZhovZ1sztMw5zQ"
 
-# پاسخ به /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("سلام! ربات DateChat آماده است 😊")
+    await update.message.reply_text("سلام! به DateChat خوش اومدی ❤️")
 
-# پاسخ پیش‌فرض به هر پیام متنی
-async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_message = update.message.text
-    await update.message.reply_text(f"پیامتو گرفتم: {user_message}")
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("دستور خاصی نیست! فقط از زندگی لذت ببر :)")
 
-if __name__ == '__main__':
+def main():
     app = ApplicationBuilder().token(TOKEN).build()
 
-    # هندلرها
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    app.add_handler(CommandHandler("help", help_command))
 
-    # اجرای ربات
-    print("ربات در حال اجراست...")
     app.run_polling()
+
+if __name__ == '__main__':
+    main()
